@@ -144,6 +144,16 @@ I am not serialising work on merges. Branches stack locally and rebase as things
 
 **Storage size.** A new index that meaningfully grows disk usage is a reasonable thing for a maintainer to object to, and "Geth does it too" is not a number. I need a measured mainnet figure early, since it also determines whether the rolling window default is sensible.
 
+**Reth is not Geth, and only half of this ports.** The filter map structure itself is self-contained: parameters, row and column derivation, the renderer, and the matcher are pure functions over hashes and positions, with no real client coupling. That is the part the Geth vectors pin down, and that is the part where the port is mostly a transliteration. Everything around it has to be written against Reth’s own primitives, and that is where the differences start to matter.
+
+Receipt availability is not a prefix in Reth. Geth has one history cutoff, so “indexable” basically means a contiguous range below the head. Reth has `PruneModes.receipts`, but also `receipts_log_filter`, a `ReceiptsLogPruneConfig` that retains receipts selectively by log filter. Under that config, a range can have some receipts and not others. Receipts can also resolve out of either static file segments or MDBX depending on the range, so log value iteration should go through `ReceiptProvider`, not a direct table walk. Log-filter-pruned ranges have to count as unindexed, otherwise the index can produce false negatives, which is the one failure mode that matters.
+
+Canonical notifications can also run ahead of disk. `CanonStateNotification` carries `Arc<Chain>` with receipts already in memory, which is cheaper than Geth re-reading them. But Reth’s engine tree can hold `memory_block_buffer_target` blocks in memory and only persist past `persistence_threshold`, so a notification can describe blocks whose receipts are not on disk yet. Geth writes on insert and does not have this window. If the indexer commits rows for those blocks and the process dies, the index can end up ahead of the data it is only supposed to be a hint for. So the head-follow path should clamp to `PersistenceState::last_persisted_block`.
+
+There are also two smaller Reth-specific differences. Geth’s matcher fans out over goroutines and can block on reads freely. Reth’s `eth_getLogs` path is async, while MDBX reads are blocking and use a cursor per thread, so parallel row lookups need one read transaction per worker on a blocking pool. Also, `EthFilter` is generic over `EthApiTypes` and reused by `op-reth` and downstream nodes, while Geth has one concrete `FilterSystem`. So the index should enter through a trait with a no-op default, not as a hard field on the filter type.
+
+None of these Reth-specific parts are covered by the Geth vectors. The vectors cover the pure FilterMaps logic, not Reth’s pruning model, persistence window, reorg behavior, async read model, or downstream generic API shape. So reorg and pruning behavior need their own tests instead of pretending the differential test covers them.
+
 **Divergence from Geth.** Geth's filter maps are still being changed. My port is against current `master` and the committed vectors will drift. The vectors are regenerable by design, so this is maintenance rather than a rewrite.
 
 ## Goal of the project
@@ -152,11 +162,17 @@ Success is a filter map index that works in Reth and makes `eth_getLogs` faster 
 
 I want to run the same set of `eth_getLogs` queries, wide historical ranges, sparse addresses, common topics, empty results, against both paths on the same node and same data, and report the speedup per query shape on mainnet and on a public testnet.
 
+The number to hit is the one in the tracking issue. Geth with its log index answers WETH transfer queries over EF treasury addresses in 0.55s over 100k blocks and 22s over 2.5M blocks, against 8.4s and 211s for Reth's bloom path. Success is parity with Geth on those shapes, on one machine, same chain data, both clients at the same head. I am stating that as an absolute rather than as a multiple of the Reth figures, because those predate concurrency work that has since landed. If the bloom path has improved the ratio shrinks while parity still holds, so the baseline gets re-measured rather than quoted.
+
+Below roughly 5x on wide sparse queries the index has not earned its disk, and I would rather say that now than discover it at week 16. The structural claim underneath is the one that holds whatever the hardware is: latency should track the number of matches, not the width of the range. The bloom path reads one header per block, the index reads one row group per searched value per map. Latency against range width at a fixed match count is the plot that shows it.
+
+The index also has to not make anything worse. Ranges too small to benefit, and unindexed ranges falling back to blooms, both stay within noise of today. Head indexing keeps up with a 12s slot with room to spare. And I report the mainnet on-disk figure in GB and as a fraction of receipt size, since by my own argument above that is the number a maintainer will actually ask for.
+
 ## Collaborators
 
 ### Fellows
 
-[0xAysh]([https://github.com/0xAysh](https://github.com/etan-status))
+[0xAysh](https://github.com/0xAysh)
 
 ### Mentors
 
@@ -165,14 +181,14 @@ TBD
 ## Resources
 
 
-| Resource                              | Link                                                                                                                                       |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| Reth tracking issue                   | [https://github.com/paradigmxyz/reth/issues/16999](https://github.com/paradigmxyz/reth/issues/16999)                                       |
+| Resource                         | Link                                                                                                                                       |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Reth tracking issue              | [https://github.com/paradigmxyz/reth/issues/16999](https://github.com/paradigmxyz/reth/issues/16999)                                       |
 | Prior attempt (closed, unmerged) | [https://github.com/paradigmxyz/reth/pull/18305](https://github.com/paradigmxyz/reth/pull/18305)                                           |
-| Geth `core/filtermaps`                | [https://github.com/ethereum/go-ethereum/tree/master/core/filtermaps](https://github.com/ethereum/go-ethereum/tree/master/core/filtermaps) |
-| EIP-7745                              | [https://eips.ethereum.org/EIPS/eip-7745](https://eips.ethereum.org/EIPS/eip-7745)                                                         |
-| EIP-8304                              | [https://eips.ethereum.org/EIPS/eip-8304](https://eips.ethereum.org/EIPS/eip-8304)                                                         |
-| Filter maps explainer                 | [https://pureth.guide/filter-maps/](https://pureth.guide/filter-maps/)                                                                     |
-| Log value index explainer             | [https://pureth.guide/log-value-index/](https://pureth.guide/log-value-index/)                                                             |
+| Geth `core/filtermaps`           | [https://github.com/ethereum/go-ethereum/tree/master/core/filtermaps](https://github.com/ethereum/go-ethereum/tree/master/core/filtermaps) |
+| EIP-7745                         | [https://eips.ethereum.org/EIPS/eip-7745](https://eips.ethereum.org/EIPS/eip-7745)                                                         |
+| EIP-8304                         | [https://eips.ethereum.org/EIPS/eip-8304](https://eips.ethereum.org/EIPS/eip-8304)                                                         |
+| Filter maps explainer            | [https://pureth.guide/filter-maps/](https://pureth.guide/filter-maps/)                                                                     |
+| Log value index explainer        | [https://pureth.guide/log-value-index/](https://pureth.guide/log-value-index/)                                                             |
 
 
