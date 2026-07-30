@@ -6,6 +6,7 @@ To create a project, write your proposal based on [template](./project-template.
 
 ## Project proposals
 
+- [EIP-8304: Trustless log and transaction index](./eip-8304-trustless-log-index.md) - Vansh Sahay
 - [Erigon SSZ Execution Blocks and EIP-7807](./erigon-ssz-execution-blocks-eip-7807.md) - Jack CC
 - [Erigon SSZ Query Language](./Erigon-SSZ-Query-Language.md) - Sagar Rana
 - [Etheorem: Lean 4 consensus-spec proofs](./etheorem-consensus-proofs-lean4.md) - Ivan Anishchuk and Raj Gill
