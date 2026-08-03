@@ -15,6 +15,7 @@ To create a project, write your proposal based on [template](./project-template.
 - [Lodestar EIP-7732 Builder](./lodestar-eip-7732-builder.md) - Kris O'Shea and Marko Lazic
 - [Pureth in Reth: SSZ Execution Blocks and Query Language](./pureth-in-reth.md) - Arsh and Parth Singh
 - [Teku Light Client Protocol](./Teku_Light_Client_Protocol.md) - Abhivansh
+- [Post-Quantum Stealth Addresses as an ERC-5564 Scheme Extension](./pa-sap.md) - Skas
 - [2D Filtermaps in Reth](./2d-filtermaps-in-reth.md) - Ayush
 - [Hive Spec-test Hardening](./hive-spect-test-hardening.md)
 - [Ream BlackBox Interop Testing](./Ream-BlackBosx-Interop-Testing.md) - Mohit
