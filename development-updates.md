@@ -130,7 +130,7 @@ The actual project development is the main part of the program. Post your regula
 | [Bankat](https://github.com/mananuf/)                |        |        |        |        |         |         |         |         |         |         |         |         |         |         |         |           |
 | [Blessing](https://github.com/dicethedev/)           | [Update 6](https://hackmd.io/@dicethedev/SyoRCkSBGe)       |        |        |        |         |         |         |         |         |         |         |         |         |         |         |           |
 | [Charles](https://github.com/creese)                 | [Update 6](https://hackmd.io/@creese/SyaqVFTSMe)       | [Update 7](https://hackmd.io/@creese/S1ty8cpSzl)       |        |        |         |         |         |         |         |         |         |         |         |         |         |           |
-| [Conall](https://github.com/XRS-001)                 |        |        |        |        |         |         |         |         |         |         |         |         |         |         |         |           |
+| [Conall](https://github.com/XRS-001) | | | [Update 8](https://docs.fileverse.io/document/pMwEzdC3P2hdcDMQbLwnrc#k=D6zxFavooaFyYXv6wgiHM4_MnXpXJKn0RHGBBldnQQU) | | | | | | | | | | | | | 
 | [Cristian](https://github.com/conache/)              | [Update 6](https://hackmd.io/@conache/rkJCpzMBzx) | [Update 7](https://hackmd.io/@conache/rJYIe06rMg) |        |        |         |         |         |         |         |         |         |         |         |         |         |           |
 | [Daniel](https://github.com/perfogic)                | [Update 6](https://hackmd.io/@perfogic/SJT8-grrGg) |        |        |        |         |         |         |         |         |         |         |         |         |         |         |           |
 | [Hans](https://github.com/vuonghuuhung)              | [Update 5 & 6](https://hackmd.io/@hansvuong/Hyh-uyHBGx)      |        |        |        |         |         |         |         |         |         |         |         |         |         |         |           |
@@ -169,6 +169,7 @@ The actual project development is the main part of the program. Post your regula
 | [Vivek Singh Solanki](https://github.com/vivek-0509) | [Update 6](https://hackmd.io/@h2RUkQVmStGWLVKk0Ne1uQ/S1MPzaPBGl) | [Update 7](https://hackmd.io/@h2RUkQVmStGWLVKk0Ne1uQ/BJxAAqX8zl) |        |        |         |         |         |         |         |         |         |         |         |         |         |           |
 | [yee](https://github.com/YXZ252426)                  |        |        |[Update8](https://hackmd.io/@yee252426/H1x552H8Gx)        |        |         |         |         |         |         |         |         |         |         |         |         |           |
 | [Zidan](https://github.com/mzf11125)                 | [Update 6](https://hackmd.io/@mzf11125/HkHWQhnVMe) |        |        |        |         |         |         |         |         |         |         |         |         |         |         |           |
+
 
 ## Cohort end
 
