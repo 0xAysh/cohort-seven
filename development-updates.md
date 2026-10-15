@@ -176,4 +176,41 @@ The final weeks of the cohort should mark the finalization of your project. Subm
 
 | Name/GH | Final Report | Project Presentation |
 | ------- | ------------ | -------------------- |
-|         |              |                      |
+| [Aarish](https://github.com/aarishnaiyer) | | |
+| [Abhivansh](https://github.com/akronim26) | | |
+| [Aiden](https://github.com/sgtSong) | | |
+| [Arsh](https://github.com/ArshLabs) | | |
+| [Astrion](https://github.com/astrion-coder) | | |
+| [Ayush](https://github.com/0xAysh/) | | |
+| [Blessing](https://github.com/dicethedev/) | | |
+| [Charles](https://github.com/creese) | | |
+| [Conall](https://github.com/XRS-001) | | |
+| [Cristian](https://github.com/conache/) | | |
+| [Daniel](https://github.com/perfogic) | | |
+| [Hans](https://github.com/vuonghuuhung) | | |
+| [Ifeoluwa](https://github.com/owanikin) | | |
+| [Isaac](https://github.com/isaac-akhigbe) | | |
+| [Ivan A](https://github.com/IvanAnishchuk) | | |
+| [Jack CC](https://github.com/JackCC703/) | | |
+| [Jeff](https://www.github.com/jeffoodchain) | | |
+| [Kimi](https://github.com/KimiWu123) | | |
+| [Kris](https://github.com/krisoshea-eth/) | | |
+| [Marko](https://github.com/markolazic01) | | |
+| [Mary](https://github.com/maryodior) | | |
+| [Mohit](https://github.com/groverInnovate) | | |
+| [Parth](https://github.com/ParthSinghPS) | | |
+| [Rahul](https://github.com/rahulbarmann/) | | |
+| [Raj Gill](https://github.com/irajgill) | | |
+| [Ray](https://github.com/rayjun) | | |
+| [Richard](https://github.com/richardgreg) | | |
+| [Roheemah](https://github.com/AbolareRoheemah) | | |
+| [Sagar](https://www.github.com/SoarinSkySagar) | | |
+| [Sameer](https://github.com/SamAg19) | | |
+| [Skas](https://www.github.com/Skanislav) | | |
+| [Soham](https://github.com/zemse) | | |
+| [Steven](https://github.com/stevemilk) | | |
+| [Tosin](https://www.github.com/tosynthegeek) | | |
+| [Vansh](https://github.com/vanshsahay) | | |
+| [Vivek Singh Solanki](https://github.com/vivek-0509) | | |
+| [yee](https://github.com/YXZ252426) | | |
+| [Zidan](https://github.com/mzf11125) | | |
